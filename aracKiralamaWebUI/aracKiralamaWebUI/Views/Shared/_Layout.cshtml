@@ -36,50 +36,6 @@
 
 <body class="animsition">
     <div class="page-wrapper">
-        <!-- HEADER MOBILE-->
-        <header class="header-mobile d-block d-lg-none">
-            <div class="header-mobile__bar">
-                <div class="container-fluid">
-                    <div class="header-mobile-inner">
-                        <a class="logo" href="/index.html">
-                            <img src="~/Content/images/icon/logo.png" alt="CoolAdmin" />
-                        </a>
-                        <button class="hamburger hamburger--slider" type="button">
-                            <span class="hamburger-box">
-                                <span class="hamburger-inner"></span>
-                            </span>
-                        </button>
-                    </div>
-                </div>
-            </div>
-            <nav class="navbar-mobile">
-                <div class="container-fluid">
-                    <ul class="navbar-mobile__list list-unstyled">
-                        <li class="has-sub">
-                            <a class="js-arrow" href="#">
-                                <i class="fas fa-tachometer-alt"></i>Araç İşlemleri
-                            </a>
-                            <ul class="navbar-mobile-sub__list list-unstyled js-sub-list">
-                                <li>
-                                    <a href="">Araç Listele</a>
-                                </li>
-                                <li>
-                                    <a href="">Araç Ekle</a>
-                                </li>
-                                <li>
-                                    <a href="">Araç Sil</a>
-                                </li>
-                                <li>
-                                    <a href="">Araç Gider Ekle</a>
-                                </li>
-                            </ul>
-                        </li>
-
-                    </ul>
-                </div>
-            </nav>
-        </header>
-        <!-- END HEADER MOBILE-->
         <!-- MENU SIDEBAR-->
         <aside class="menu-sidebar d-none d-lg-block">
             <div class="logo">
@@ -96,16 +52,26 @@
                             </a>
                             <ul class="list-unstyled navbar__sub-list js-sub-list">
                                 <li>
-                                    <a href="">Araç Listele</a>
+                                    <a href="/Arac/IndexAsync">Araç Listele</a>
                                 </li>
                                 <li>
-                                    <a href="">Araç Ekle</a>
+                                    <a href="/Arac/Create">Araç Ekle</a>
+                                </li>
+                            </ul>
+                        </li>
+
+                    </ul>
+                    <ul class="list-unstyled navbar__list">
+                        <li class="active has-sub">
+                            <a class="js-arrow" href="#">
+                                <i class="fas fa-lira-sign"></i>Gider Tablosu
+                            </a>
+                            <ul class="list-unstyled navbar__sub-list js-sub-list">
+                                <li>
+                                    <a href="/gider/IndexAsync">Gider Listele</a>
                                 </li>
                                 <li>
-                                    <a href="">Araç Sil</a>
-                                </li>
-                                <li>
-                                    <a href="">Araç Gider Ekle</a>
+                                    <a href="/gider/CreateAsync">Gider Ekle</a>
                                 </li>
                             </ul>
                         </li>

@@ -45,6 +45,9 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="AracKiralamaApp.Domains">
+      <HintPath>..\..\..\Soap-proje-1\AracKirala\AracKiralamaApp.Domains\bin\Debug\AracKiralamaApp.Domains.dll</HintPath>
+    </Reference>
     <Reference Include="Microsoft.CSharp" />
     <Reference Include="System" />
     <Reference Include="System.Data" />
@@ -121,11 +124,19 @@
     <Compile Include="App_Start\FilterConfig.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="Controllers\AracController.cs" />
+    <Compile Include="Controllers\DefaultController.cs" />
+    <Compile Include="Controllers\giderController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
+    <Compile Include="Controllers\KiralamaController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
     <Compile Include="Models\aracModel.cs" />
+    <Compile Include="Models\harcamaTuruModel.cs" />
+    <Compile Include="Models\harcamaModel.cs" />
+    <Compile Include="Models\kiralamaModel.cs" />
+    <Compile Include="Models\ResponseContent.cs" />
+    <Compile Include="Models\TransactionRequestTemplate.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -382,11 +393,18 @@
     <Content Include="Views\Home\About.cshtml" />
     <Content Include="Views\Home\Contact.cshtml" />
     <Content Include="Views\Home\Index.cshtml" />
-    <Content Include="Views\Arac\Index.cshtml" />
     <Content Include="Views\Arac\Create.cshtml" />
+    <Content Include="Views\Arac\IndexAsync.cshtml" />
+    <Content Include="Views\Arac\Edit.cshtml" />
+    <Content Include="Views\gider\IndexAsync.cshtml" />
+    <Content Include="Views\gider\Create.cshtml" />
+    <Content Include="Views\gider\CreateAsync.cshtml" />
+    <Content Include="Views\Kiralama\IndexAsync.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
+    <Folder Include="Results\" />
+    <Folder Include="Views\Default\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="fonts\glyphicons-halflings-regular.woff2" />

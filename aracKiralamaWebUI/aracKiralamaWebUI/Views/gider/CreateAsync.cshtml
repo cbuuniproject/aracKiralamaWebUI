@@ -1,0 +1,53 @@
+﻿@model IEnumerable<aracKiralamaWebUI.Models.harcamaTuruModel>
+
+@{
+    ViewBag.Title = "Gider Ekle";
+}
+
+
+
+
+<div class="card">
+    <div class="card-header">
+        <strong>Gider Bilgileri</strong>
+    </div>
+    <form action="" method="post" class="form-horizontal" action="gider/Create">
+        <div class="card-body card-block">
+
+            <div class="row form-group">
+                <div class="col col-sm-5">
+                    <label for="select" class=" form-control-label">Harcama Türü</label>
+                </div>
+                <div class="col-12 col-sm-6">
+                    <select name="harcamaId" id="harcamaId" class="form-control">
+                        @foreach (var item in Model)
+                        {
+                        <option value="@Html.DisplayFor(modelItem => item.harcamaId)">@Html.DisplayFor(modelItem => item.harcamaTuru)</option>
+                        }
+                    </select>
+                </div>
+            </div>
+            <div class="row form-group">
+                <div class="col col-sm-5">
+                    <label for="textarea-input" class=" form-control-label">Açıklama</label>
+                </div>
+                <div class="col-12 col-sm-6">
+                    <textarea name="aciklama" id="aciklama" rows="9" placeholder="Açıklama..." class="form-control"></textarea>
+                </div>
+            </div>
+            <div class="row form-group">
+                <div class="col col-sm-5">
+                    <label for="input-small" class=" form-control-label">Ucret</label>
+                </div>
+                <div class="col col-sm-6">
+                    <input type="text" id="ucret" name="ucret" placeholder="Ucret" class="input-sm form-control-sm form-control">
+                </div>
+            </div>
+        </div>
+        <div class="card-footer">
+            <button type="submit" class="btn btn-primary btn-sm ">
+                <i class="fa fa-dot-circle-o"></i> Kaydet
+            </button>
+        </div>
+    </form>
+</div>

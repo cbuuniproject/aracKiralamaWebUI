@@ -1,4 +1,6 @@
-﻿using aracKiralamaWebUI.Models;
+﻿using AracKiralamaApp.Domains;
+using aracKiralamaWebUI.Models;
+using BankAppWebApi.Models;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
 using System;
@@ -17,11 +19,62 @@ namespace aracKiralamaWebUI.Controllers
     public class AracController : Controller
     {
         // GET: Arac
-        public ActionResult Index()
+        public async System.Threading.Tasks.Task<ActionResult> IndexAsync()
         {
-            List<aracModel> aracData = new List<aracModel>();
-            aracData = GetApiData();
-            return View();
+            List<Arac> data = new List<Arac>();
+            List<aracModel> modelData = new List<aracModel>();
+            try
+            {
+                
+                // Create a HttpClient
+                using (var client = new HttpClient())
+                {
+                    // Setup basics
+                    client.BaseAddress = new Uri("http://localhost:49774/");
+                    client.DefaultRequestHeaders.Accept.Clear();
+                    client.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
+
+                    // Get Request from the URI
+                    using (var result = await client.GetAsync("api/Arac"))
+                    {
+                        // Check the Result
+                        if (result.IsSuccessStatusCode)
+                        {
+                            // Take the Result as a json string
+                            var value = result.Content.ReadAsStringAsync().Result;
+
+                            // Deserialize the string with a Json Converter to ResponseContent object and fill the datagrid
+                            data= JsonConvert.DeserializeObject<ResponseContent<Arac>>(value).Data.ToList();
+                        }
+                    }
+                }
+                foreach (var item in data)
+                {
+                    aracModel yeniArac = new aracModel
+                    {
+                        marka = item.marka,
+                        model = item.model,
+                        airbagSayisi = item.airbagSayisi,
+                        anlikKm = item.anlikKm,
+                        Id = item.aracId,
+                        bagajHacmi = item.bagajHacmi,
+                        gunlukFiyat = item.gunlukFiyat,
+                        gunlukMaxKmSiniri = item.gunlukMaxKmSiniri,
+                        koltukSayisi = item.koltukSayisi,
+                        minEhliyetYasi = item.minEhliyetYasi,
+                        minYasSiniri = item.minYasSiniri,
+                        sirketId = item.sirketId,
+                    };
+                    modelData.Add(yeniArac);  
+                }
+                
+                return View(modelData);
+            }
+            catch (Exception ex)
+            {
+                return View();
+            }
+            
         }
 
         // GET: Arac/Details/5
@@ -38,19 +91,19 @@ namespace aracKiralamaWebUI.Controllers
 
         // POST: Arac/Create
         [HttpPost]
-        public async System.Threading.Tasks.Task<ActionResult> CreateAsync(FormCollection collection)
+        public async System.Threading.Tasks.Task<ActionResult> Create(FormCollection collection)
         {
-            aracModel yArac = new aracModel();
+            Arac yArac = new Arac();
             yArac.marka = collection["aracMarka"].ToString();
             yArac.model= collection["aracModel"].ToString();
             yArac.minEhliyetYasi = Convert.ToInt32(collection["minEhliyetYasi"]);
-            yArac.minYasSiniri = Convert.ToInt32(collection["minEhliyetYasi"]);
-            yArac.gunlukMaxKm = Convert.ToInt32(collection["gunlukMaxKmSiniri"]);
+            yArac.minYasSiniri = Convert.ToByte(collection["minEhliyetYasi"]);
+            yArac.gunlukMaxKmSiniri = Convert.ToByte(collection["gunlukMaxKmSiniri"]);
             yArac.anlikKm = Convert.ToInt32(collection["anlikKm"]);
-            yArac.airbagSayisi = Convert.ToInt32(collection["airbagSayisi"]);
-            yArac.bagajHacmi = Convert.ToInt32(collection["bagajHacmi"]);
-            yArac.koltukSayisi = Convert.ToInt32(collection["koltukSayisi"]);
-            yArac.gunlukFiyat = Convert.ToDecimal(collection["gunlukFiyat"]);
+            yArac.airbagSayisi = Convert.ToByte(collection["airbagSayisi"]);
+            yArac.bagajHacmi = short.Parse(collection["bagajHacmi"]);
+            yArac.koltukSayisi = Convert.ToByte(collection["koltukSayisi"]);
+            yArac.gunlukFiyat = Convert.ToInt32(collection["gunlukFiyat"]);
             yArac.sirketId = 1;
             try
             {
@@ -72,7 +125,7 @@ namespace aracKiralamaWebUI.Controllers
                     // Post Request to the URI
                     var result = await client.PostAsync("api/Arac", content);
                     // Check for result
-                    return RedirectToAction("Index");
+                    return RedirectToAction("IndexAsync");
                 }
             }
             catch (Exception ex)
@@ -96,7 +149,7 @@ namespace aracKiralamaWebUI.Controllers
             {
                 // TODO: Add update logic here
 
-                return RedirectToAction("Index");
+                return RedirectToAction("IndexAsync");
             }
             catch
             {
@@ -107,7 +160,7 @@ namespace aracKiralamaWebUI.Controllers
         // GET: Arac/Delete/5
         public ActionResult Delete(int id)
         {
-            return View();
+            return View("IndexAsync");
         }
 
         // POST: Arac/Delete/5
@@ -118,7 +171,7 @@ namespace aracKiralamaWebUI.Controllers
             {
                 // TODO: Add delete logic here
 
-                return RedirectToAction("Index");
+                return RedirectToAction("IndexAsync");
             }
             catch
             {
@@ -126,28 +179,5 @@ namespace aracKiralamaWebUI.Controllers
             }
         }
 
-        public List<aracModel> GetApiData()
-        {
-
-            var apiUrl = "http://localhost:49774/api/Arac";
-
-            //Connect API
-            Uri url = new Uri(apiUrl);
-            WebClient client = new WebClient();
-            client.Encoding = System.Text.Encoding.UTF8;
-
-            string json = client.DownloadString(url);
-            //END
-
-            //JSON Parse START
-            JObject data = JObject.Parse(json);
-            string a = data.Last.ToString() ;
-            //data = JObject.Parse(a);
-            JavaScriptSerializer ser = new JavaScriptSerializer();
-            //List<aracModel> jsonList = JsonConvert.DeserializeObject<List<aracModel>>(json);
-            //END
-
-            return null;
-        }
     }
 }

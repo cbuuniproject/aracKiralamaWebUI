@@ -7,17 +7,21 @@ namespace aracKiralamaWebUI.Models
 {
     public class aracModel
     {
-        public int aracId { get; set; }
+        public aracModel()
+        {
+
+        }
+        public int Id { get; set; }
         public int sirketId { get; set; }
         public string marka { get; set; }
         public string model { get; set; }
         public int minEhliyetYasi { get; set; }
-        public int minYasSiniri { get; set; }
-        public int gunlukMaxKm { get; set; }
-        public int airbagSayisi { get; set; }
+        public short minYasSiniri { get; set; }
+        public short gunlukMaxKmSiniri { get; set; }
         public int anlikKm { get; set; }
-        public int bagajHacmi { get; set; }
-        public int koltukSayisi { get; set; }
-        public decimal gunlukFiyat { get; set; }
+        public byte airbagSayisi { get; set; }
+        public short bagajHacmi { get; set; }
+        public byte koltukSayisi { get; set; }
+        public int gunlukFiyat { get; set; }
     }
 }

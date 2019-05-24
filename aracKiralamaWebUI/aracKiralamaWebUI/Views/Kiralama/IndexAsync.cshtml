@@ -1,0 +1,48 @@
+﻿@model IEnumerable<aracKiralamaWebUI.Models.kiralamaModel>
+
+@{
+    ViewBag.Title = "IndexAsync";
+}
+
+<h2>Kiralama Listesi</h2>
+
+
+<div class="row m-t-30">
+    <div class="col-md-12">
+        <!-- DATA TABLE-->
+        <div class="table-responsive m-b-40">
+            <table class="table table-borderless table-data3">
+                <thead>
+                    <tr>
+                        <th>
+                            @Html.DisplayNameFor(model => model.aracId)
+                        </th>
+                        <th>
+                            @Html.DisplayNameFor(model => model.verilisTarihi)
+                        </th>
+                        <th></th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach (var item in Model)
+                    {
+                        <tr>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.aracId)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.verilisTarihi)
+                            </td>
+                            <td>
+                                @Html.ActionLink("Edit", "Edit", new { /* id=item.PrimaryKey */ }) |
+                                @Html.ActionLink("Details", "Details", new { /* id=item.PrimaryKey */ }) |
+                                @Html.ActionLink("Delete", "Delete", new { /* id=item.PrimaryKey */ })
+                            </td>
+                        </tr>
+                    }
+                </tbody>
+            </table>
+        </div>
+        <!-- END DATA TABLE-->
+    </div>
+</div>

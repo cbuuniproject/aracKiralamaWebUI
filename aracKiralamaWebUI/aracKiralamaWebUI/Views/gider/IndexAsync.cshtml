@@ -1,0 +1,54 @@
+﻿@model IEnumerable<aracKiralamaWebUI.Models.harcamaModel>
+@{
+    ViewBag.Title = "Araç Listesi";
+}
+
+<h2>Araç Listesi</h2>
+
+
+<div class="row m-t-30">
+    <div class="col-md-12">
+        <!-- DATA TABLE-->
+        <div class="table-responsive m-b-40">
+            <table class="table table-borderless table-data3">
+                <thead>
+                    <tr>
+                        <th>
+                            Harcama Türü
+                        </th>
+                        <th>
+                            Açıklama
+                        </th>
+                        <th>
+                            Tarih
+                        </th>
+                        <th></th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach (var item in Model)
+                    {
+                        <tr>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.harcamaTuru)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.aciklama)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.tarih)
+                            </td>
+                            <td>
+                                Delete
+                                <!--@Html.ActionLink("Delete", "Delete", new { /* id=item.PrimaryKey */ })-->
+                            </td>
+                        </tr>
+                    }
+                </tbody>
+            </table>
+        </div>
+        <!-- END DATA TABLE-->
+    </div>
+</div>
+
+<table class="table"></table>
