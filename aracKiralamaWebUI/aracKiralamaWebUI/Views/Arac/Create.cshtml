@@ -1,0 +1,102 @@
+﻿
+@{
+    ViewBag.Title = "Create";
+}
+
+
+<div class="card">
+    <div class="card-header">
+        <strong>Araç Bilgileri</strong>
+    </div>
+    <form action="" method="post" class="form-horizontal" action="Arac/Create">
+        <div class="card-body card-block">
+
+            <div class="row form-group">
+                <div class="col col-sm-5">
+                    <label for="input-small" class=" form-control-label">Araç Marka</label>
+                </div>
+                <div class="col col-sm-6">
+                    <input type="text" id="aracMarka" name="aracMarka" placeholder="Araç Marka" class="input-sm form-control-sm form-control">
+                </div>
+            </div>
+            <div class="row form-group">
+                <div class="col col-sm-5">
+                    <label for="input-small" class=" form-control-label">Araç Model</label>
+                </div>
+                <div class="col col-sm-6">
+                    <input type="text" id="aracModel" name="aracModel" placeholder="Araç Model" class="input-sm form-control-sm form-control">
+                </div>
+            </div>
+            <div class="row form-group">
+                <div class="col col-sm-5">
+                    <label for="input-small" class=" form-control-label">En Az Ehliyet Yaşı</label>
+                </div>
+                <div class="col col-sm-6">
+                    <input type="text" id="minEhliyetYasi" name="minEhliyetYasi" placeholder="En Az Ehliyet Yaşı" class="input-sm form-control-sm form-control">
+                </div>
+            </div>
+            <div class="row form-group">
+                <div class="col col-sm-5">
+                    <label for="input-small" class=" form-control-label">En Az Yaş Sınırı</label>
+                </div>
+                <div class="col col-sm-6">
+                    <input type="text" id="minYasSiniri" name="minYasSiniri" placeholder="En Az Yaş Sınırı" class="input-sm form-control-sm form-control">
+                </div>
+            </div>
+            <div class="row form-group">
+                <div class="col col-sm-5">
+                    <label for="input-small" class=" form-control-label">Günlük Kilometre Limiti</label>
+                </div>
+                <div class="col col-sm-6">
+                    <input type="text" id="gunlukMaxKmSiniri" name="gunlukMaxKmSiniri" placeholder="Günlük Kilometre Limiti" class="input-sm form-control-sm form-control">
+                </div>
+            </div>
+            <div class="row form-group">
+                <div class="col col-sm-5">
+                    <label for="input-small" class=" form-control-label">Anlık Kilometre Değeri</label>
+                </div>
+                <div class="col col-sm-6">
+                    <input type="text" id="anlikKm" name="anlikKm" placeholder="Anlık Kilometre Değeri" class="input-sm form-control-sm form-control">
+                </div>
+            </div>
+            <div class="row form-group">
+                <div class="col col-sm-5">
+                    <label for="input-small" class=" form-control-label">Airbag Sayısı</label>
+                </div>
+                <div class="col col-sm-6">
+                    <input type="text" id="airbagSayisi" name="airbagSayisi" placeholder="Airbag Sayısı" class="input-sm form-control-sm form-control">
+                </div>
+            </div>
+            <div class="row form-group">
+                <div class="col col-sm-5">
+                    <label for="input-small" class=" form-control-label">Bagaj Hacmi</label>
+                </div>
+                <div class="col col-sm-6">
+                    <input type="text" id="bagajHacmi" name="bagajHacmi" placeholder="Bagaj Hacmi" class="input-sm form-control-sm form-control">
+                </div>
+            </div>
+            <div class="row form-group">
+                <div class="col col-sm-5">
+                    <label for="input-small" class=" form-control-label">Koltuk Sayısı</label>
+                </div>
+                <div class="col col-sm-6">
+                    <input type="text" id="koltukSayisi" name="koltukSayisi" placeholder="Koltuk Sayısı" class="input-sm form-control-sm form-control">
+                </div>
+            </div>
+            <div class="row form-group">
+                <div class="col col-sm-5">
+                    <label for="input-small" class=" form-control-label">Günlük Fiyat</label>
+                </div>
+                <div class="col col-sm-6">
+                    <input type="text" id="gunlukFiyat" name="gunlukFiyat" placeholder="Günlük Fiyat" class="input-sm form-control-sm form-control">
+                </div>
+            </div>
+
+        </div>
+        <div class="card-footer">
+            <button type="submit" class="btn btn-primary btn-sm ">
+                <i class="fa fa-dot-circle-o"></i> Kaydet
+            </button>
+        </div>
+    </form>
+</div>
