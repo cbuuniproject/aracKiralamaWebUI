@@ -7,6 +7,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Net.Http;
 using System.Net.Http.Headers;
+using System.Text;
 using System.Web;
 using System.Web.Mvc;
 
@@ -31,7 +32,7 @@ namespace aracKiralamaWebUI.Controllers
                     client.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
 
                     // Get Request from the URI
-                    using (var result = await client.GetAsync("api/Kiralamalar"))
+                    using (var result = await client.GetAsync("api/KiralamaBusiness"))
                     {
                         // Check the Result
                         if (result.IsSuccessStatusCode)
@@ -66,8 +67,6 @@ namespace aracKiralamaWebUI.Controllers
             {
                 return View();
             }
-
-            return View();
         }
 
         // GET: Kiralama/Details/5
@@ -77,23 +76,93 @@ namespace aracKiralamaWebUI.Controllers
         }
 
         // GET: Kiralama/Create
-        public ActionResult Create()
+        public async System.Threading.Tasks.Task<ActionResult> CreateAsync()
         {
-            return View();
+            List<Arac> data = new List<Arac>();
+            List<aracModel> aracData = new List<aracModel>();
+            try
+            {
+                // Create a HttpClient
+                using (var client = new System.Net.Http.HttpClient())
+                {
+                    // Setup basics
+                    client.BaseAddress = new Uri("http://localhost:49774/");
+                    client.DefaultRequestHeaders.Accept.Clear();
+                    client.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
+
+                    // Get Request from the URI
+                    using (var result = await client.GetAsync("api/Arac"))
+                    {
+                        // Check the Result
+                        if (result.IsSuccessStatusCode)
+                        {
+                            // Take the Result as a json string
+                            var value = result.Content.ReadAsStringAsync().Result;
+
+                            // Deserialize the string with a Json Converter to ResponseContent object and fill the datagrid
+                            data = JsonConvert.DeserializeObject<ResponseContent<Arac>>(value).Data.ToList();
+                        }
+                    }
+                }
+                foreach (var item in data)
+                {
+                    aracModel yeniArac = new aracModel
+                    {
+                        marka = item.marka,
+                        model=item.model,
+                        Id=item.aracId,
+                    };
+                    aracData.Add(yeniArac);
+                }
+
+                return View(aracData);
+            }
+            catch (Exception ex)
+            {
+                return View();
+            }
+
         }
 
         // POST: Kiralama/Create
         [HttpPost]
-        public ActionResult Create(FormCollection collection)
+        public async System.Threading.Tasks.Task<ActionResult> CreateAsync(FormCollection collection)
         {
+            Kiralama yKiralama = new Kiralama();
+            yKiralama.aracId = Convert.ToInt32(collection["aracId"].ToString());
+            yKiralama.geriAlisTarihi = Convert.ToDateTime(collection["alisTarihi"]);
+            yKiralama.verilisTarihi = Convert.ToDateTime(collection["verisTarihi"]);
+            yKiralama.musteriId = 1;
+            yKiralama.sonKm = Convert.ToInt32(collection["sonKm"]);
+            yKiralama.ucret= Convert.ToInt32(collection["ucret"]);
+            yKiralama.verilisKm = Convert.ToInt32(collection["verilisKm"]);
+            yKiralama.sirketId = 1;
             try
             {
-                // TODO: Add insert logic here
+                // Create a HttpClient
+                using (var client = new HttpClient())
+                {
+                    // Setup basics
+                    client.BaseAddress = new Uri("http://localhost:49774/");
+                    client.DefaultRequestHeaders.Accept.Clear();
+                    client.DefaultRequestHeaders.Accept.Add(
+                        new MediaTypeWithQualityHeaderValue("application/json"));
 
-                return RedirectToAction("Index");
+                    // Create post body object
+
+                    // Serialize C# object to Json Object
+                    var serializedProduct = JsonConvert.SerializeObject(yKiralama);
+                    // Json object to System.Net.Http content type
+                    var content = new StringContent(serializedProduct, Encoding.UTF8, "application/json");
+                    // Post Request to the URI
+                    var result = await client.PostAsync("api/KiralamaBusiness", content);
+                    // Check for result
+                    return RedirectToAction("IndexAsync");
+                }
             }
-            catch
+            catch (Exception ex)
             {
+                // Inform user
                 return View();
             }
         }

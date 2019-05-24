@@ -20,25 +20,30 @@
                         <th>
                             @Html.DisplayNameFor(model => model.verilisTarihi)
                         </th>
+                        <th>
+                            @Html.DisplayNameFor(model => model.ucret)
+                        </th>
                         <th></th>
                     </tr>
                 </thead>
                 <tbody>
                     @foreach (var item in Model)
                     {
-                        <tr>
-                            <td>
-                                @Html.DisplayFor(modelItem => item.aracId)
-                            </td>
-                            <td>
-                                @Html.DisplayFor(modelItem => item.verilisTarihi)
-                            </td>
-                            <td>
-                                @Html.ActionLink("Edit", "Edit", new { /* id=item.PrimaryKey */ }) |
-                                @Html.ActionLink("Details", "Details", new { /* id=item.PrimaryKey */ }) |
-                                @Html.ActionLink("Delete", "Delete", new { /* id=item.PrimaryKey */ })
-                            </td>
-                        </tr>
+                    <tr>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.aracId)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.verilisTarihi)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.ucret)
+                        </td>
+                        <td>
+                            Delete
+                            <!--@Html.ActionLink("Delete", "Delete", new { /* id=item.PrimaryKey */ })-->
+                        </td>
+                    </tr>
                     }
                 </tbody>
             </table>

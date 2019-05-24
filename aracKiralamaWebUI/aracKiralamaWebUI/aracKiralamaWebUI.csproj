@@ -124,6 +124,7 @@
     <Compile Include="App_Start\FilterConfig.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="Controllers\AracController.cs" />
+    <Compile Include="Controllers\DashboardController.cs" />
     <Compile Include="Controllers\DefaultController.cs" />
     <Compile Include="Controllers\giderController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
@@ -132,6 +133,9 @@
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
     <Compile Include="Models\aracModel.cs" />
+    <Compile Include="Models\gelirGiderModel.cs" />
+    <Compile Include="Models\gelirModel.cs" />
+    <Compile Include="Models\giderModel.cs" />
     <Compile Include="Models\harcamaTuruModel.cs" />
     <Compile Include="Models\harcamaModel.cs" />
     <Compile Include="Models\kiralamaModel.cs" />
@@ -397,9 +401,10 @@
     <Content Include="Views\Arac\IndexAsync.cshtml" />
     <Content Include="Views\Arac\Edit.cshtml" />
     <Content Include="Views\gider\IndexAsync.cshtml" />
-    <Content Include="Views\gider\Create.cshtml" />
     <Content Include="Views\gider\CreateAsync.cshtml" />
     <Content Include="Views\Kiralama\IndexAsync.cshtml" />
+    <Content Include="Views\Kiralama\CreateAsync.cshtml" />
+    <Content Include="Views\Dashboard\IndexAsync.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
